@@ -1,10 +1,16 @@
 import Container from "../custom/Container";
 import { Button } from "../ui/button";
+import { motion } from "motion/react";
 
 const Navbar = () => {
     return (
         <Container asChild>
-            <header className="flex justify-between items-center min-h-14">
+            <motion.header
+                className="flex justify-between items-center min-h-14"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1, duration: 1 }}
+            >
                 <h4 className="text-xl">iRepair</h4>
                 <nav className="flex items-center gap-3">
                     <ul className="flex gap-3">
@@ -14,7 +20,7 @@ const Navbar = () => {
                     </ul>
                     <Button>Login</Button>
                 </nav>
-            </header>
+            </motion.header>
         </Container>
     );
 };
