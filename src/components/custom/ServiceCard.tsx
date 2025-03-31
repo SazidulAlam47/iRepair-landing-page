@@ -34,7 +34,11 @@ const ServiceCard = ({
             </div>
             {image && (
                 <div>
-                    <img src={image} alt="macbook" className="h-full w-2xl" />
+                    <img
+                        src={image}
+                        alt="macbook"
+                        className="h-full w-2xl object-cover object-left"
+                    />
                 </div>
             )}
         </div>

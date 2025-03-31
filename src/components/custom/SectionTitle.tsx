@@ -14,7 +14,7 @@ const SectionTitle = ({ title, highlight, description }: SectionTitleProps) => {
     return (
         <div className="space-y-4">
             <h3
-                className="text-6xl font-semibold text-center"
+                className="text-5xl lg:text-6xl font-semibold text-center"
                 dangerouslySetInnerHTML={{ __html: highlightedTitle }}
             />
             <p className="w-3/5 mx-auto text-center text-lg text-accent">

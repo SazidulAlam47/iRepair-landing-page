@@ -1,13 +1,24 @@
 import Container from "@/components/custom/Container";
 import macbook from "@/assets/images/macbook.jpg";
 import CountNumber from "@/components/custom/CountNumber";
+import { useInView, motion } from "motion/react";
+import { useRef } from "react";
 
 const WhoWe = () => {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true });
+
     return (
         <section className="relative">
-            <div className="absolute h-full hidden lg:flex items-center">
+            <motion.div
+                ref={ref}
+                initial={{ x: -600 }}
+                animate={isInView ? { x: 0 } : {}}
+                transition={{ duration: 0.5 }}
+                className="absolute h-full hidden lg:flex items-center"
+            >
                 <img src={macbook} alt="Macbook" />
-            </div>
+            </motion.div>
             <Container className="grid grid-cols-1 lg:grid-cols-2 py-24 md:py-16 sm:py-12 gap-8 relative z-10">
                 <div className="hidden lg:block opacity-0 invisible">
                     <img src={macbook} alt="Macbook" />
@@ -28,8 +39,16 @@ const WhoWe = () => {
                         take care of it.
                     </p>
                     <div className="flex justify-between">
-                        <CountNumber count="98%" label="Successful repairs" />
-                        <CountNumber count="2k+" label="Successful repairs" />
+                        <CountNumber
+                            count={98}
+                            suffix="%"
+                            label="Successful repairs"
+                        />
+                        <CountNumber
+                            count={2}
+                            suffix="k+"
+                            label="Successful repairs"
+                        />
                     </div>
                 </div>
             </Container>

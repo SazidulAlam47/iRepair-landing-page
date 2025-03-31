@@ -12,7 +12,7 @@ const intro = {
         transition: {
             duration: 1,
             staggerChildren: 0.2,
-            delayChildren: 1,
+            delayChildren: 0.7,
         },
     },
 };
@@ -35,7 +35,7 @@ const laptop = {
         rotate: -30,
         scale: 1,
         transition: {
-            duration: 1,
+            duration: 0.7,
             delay: 0,
             y: {
                 duration: 2,
