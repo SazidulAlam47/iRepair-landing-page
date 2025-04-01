@@ -1,21 +1,22 @@
 import { motion } from "motion/react";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import Container from "../custom/Container";
 
-// Define prop types for FooterSection
 interface FooterSectionProps {
     title: string;
     links: string[];
 }
+interface SocialMediaIcon {
+    href: string;
+    icon: ReactNode;
+}
 
-// Animation variants
 const fadeInVariant = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-// Reusable Footer Links Section with Animation
-const FooterSection: React.FC<FooterSectionProps> = ({ title, links }) => (
+const FooterSection = ({ title, links }: FooterSectionProps) => (
     <motion.div
         variants={fadeInVariant}
         initial="hidden"
@@ -41,14 +42,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ title, links }) => (
     </motion.div>
 );
 
-// Define types for social media icons
-interface SocialMediaIcon {
-    href: string;
-    icon: ReactNode;
-}
-
-// Social Media Icons Component
-const SocialMediaIcons: React.FC = () => {
+const SocialMediaIcons = () => {
     const icons: SocialMediaIcon[] = [
         {
             href: "https://facebook.com",
@@ -139,8 +133,7 @@ const SocialMediaIcons: React.FC = () => {
     );
 };
 
-// Footer Component with Animation
-const Footer: React.FC = () => {
+const Footer = () => {
     return (
         <motion.footer
             initial={{ opacity: 0 }}
@@ -210,7 +203,7 @@ const Footer: React.FC = () => {
                         }}
                         className="text-gray-500 text-sm text-center sm:text-left"
                     >
-                        © {new Date().getFullYear()} iRepair. All Rights
+                        &copy; {new Date().getFullYear()} iRepair. All Rights
                         Reserved.
                     </motion.p>
                     <SocialMediaIcons />
