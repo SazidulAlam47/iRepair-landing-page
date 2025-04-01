@@ -47,9 +47,11 @@ const SectionTitle = ({ title, highlight, description }: SectionTitleProps) => {
     return (
         <div className="space-y-4" ref={containerRef}>
             <motion.h3
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 2 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={
+                    isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+                }
+                transition={{ duration: 0.6, ease: "easeOut" }}
                 className="text-5xl lg:text-6xl font-semibold text-center"
                 dangerouslySetInnerHTML={{ __html: highlightedTitle }}
             />
