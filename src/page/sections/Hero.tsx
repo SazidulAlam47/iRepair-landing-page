@@ -12,7 +12,7 @@ const intro = {
         transition: {
             duration: 1,
             staggerChildren: 0.2,
-            delayChildren: 0.7,
+            delayChildren: 0.4,
         },
     },
 };
@@ -50,7 +50,7 @@ const laptop = {
 const Hero = () => {
     return (
         <Container asChild>
-            <section className="grid grid-cols-1 lg:grid-cols-2 py-36">
+            <section className="grid grid-cols-1 lg:grid-cols-2 lg:h-[calc(100vh-40px)] py-36">
                 <motion.div
                     className="flex flex-col justify-center gap-1"
                     variants={intro}

@@ -27,7 +27,10 @@ const CountNumber = ({
 
     useEffect(() => {
         let controls: AnimationPlaybackControls | undefined;
-        if (isInView) controls = animate(count, finalCount, { duration: 5 });
+        if (isInView)
+            controls = animate(count, finalCount, {
+                duration: 1.5,
+            });
         return () => {
             if (controls) controls.stop();
         };

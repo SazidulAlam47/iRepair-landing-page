@@ -1,4 +1,6 @@
 import { cn } from "@/lib/utils";
+import { motion, useSpring, useScroll, useTransform } from "motion/react";
+import { useRef } from "react";
 
 type TServiceCardProps = {
     heading: string;
@@ -15,14 +17,37 @@ const ServiceCard = ({
     className,
     background,
 }: TServiceCardProps) => {
+    const ref = useRef(null);
+
+    const { scrollYProgress } = useScroll({
+        target: ref,
+        offset: ["start end", "end end"],
+    });
+
+    const scaleSpring = useSpring(scrollYProgress, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001,
+    });
+
+    const scale = useTransform(scaleSpring, [0, 1], [0.85, 1]);
+    const opacity = useTransform(scaleSpring, [0, 1], [0.6, 1]);
+
     return (
-        <div
+        <motion.div
+            ref={ref}
             className={cn(
                 "bg-primary-foreground h-80 flex justify-between rounded-xl overflow-hidden",
                 className,
                 { "bg-cover relative": background }
             )}
-            style={background ? { backgroundImage: `url(${background})` } : {}}
+            style={{
+                scale,
+                opacity,
+                ...(background
+                    ? { backgroundImage: `url(${background})` }
+                    : {}),
+            }}
         >
             {background && (
                 <div className="bg-white absolute inset-0 opacity-80 z-10" />
@@ -36,12 +61,12 @@ const ServiceCard = ({
                 <div>
                     <img
                         src={image}
-                        alt="macbook"
+                        alt="service"
                         className="h-full w-2xl object-cover object-left"
                     />
                 </div>
             )}
-        </div>
+        </motion.div>
     );
 };
 

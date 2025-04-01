@@ -1,17 +1,44 @@
 import Container from "@/components/custom/Container";
 import macbook from "@/assets/images/macbook.jpg";
 import CountNumber from "@/components/custom/CountNumber";
-import { useInView, motion } from "motion/react";
-import { useRef } from "react";
+import { useInView, motion, animate, stagger } from "motion/react";
+import { useRef, useEffect } from "react";
+import { splitText } from "motion-plus";
 
 const WhoWe = () => {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true });
+    const sectionRef = useRef(null);
+    const isInView = useInView(sectionRef, { once: true });
+
+    const textContainerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        document.fonts.ready.then(() => {
+            if (!textContainerRef.current) return;
+
+            textContainerRef.current.style.visibility = "visible";
+
+            const { words } = splitText(
+                textContainerRef.current.querySelector("h3")!
+            );
+
+            if (isInView) {
+                animate(
+                    words,
+                    { opacity: [0, 1], y: [10, 0] },
+                    {
+                        type: "spring",
+                        duration: 3,
+                        bounce: 0,
+                        delay: stagger(0.05),
+                    }
+                );
+            }
+        });
+    }, [isInView]);
 
     return (
-        <section className="relative">
+        <section className="relative" ref={sectionRef}>
             <motion.div
-                ref={ref}
                 initial={{ x: -600 }}
                 animate={isInView ? { x: 0 } : {}}
                 transition={{ duration: 0.5 }}
@@ -19,7 +46,10 @@ const WhoWe = () => {
             >
                 <img src={macbook} alt="Macbook" />
             </motion.div>
-            <Container className="grid grid-cols-1 lg:grid-cols-2 py-24 md:py-16 sm:py-12 gap-8 relative z-10">
+            <Container
+                ref={textContainerRef}
+                className="grid grid-cols-1 lg:grid-cols-2 py-24 md:py-16 sm:py-12 gap-8 relative z-10"
+            >
                 <div className="hidden lg:block opacity-0 invisible">
                     <img src={macbook} alt="Macbook" />
                 </div>

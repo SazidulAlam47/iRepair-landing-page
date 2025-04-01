@@ -9,7 +9,7 @@ const Navbar = () => {
                 className="flex justify-between items-center min-h-14"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 1, duration: 1 }}
+                transition={{ delay: 0.7, duration: 1 }}
             >
                 <h4 className="text-xl">iRepair</h4>
                 <nav className="flex items-center gap-3">
